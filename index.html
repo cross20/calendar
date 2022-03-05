@@ -4,11 +4,46 @@
         <meta charset="utf-8">
         <title>Calendar</title>
         <!-- CSS -->
-        <link rel="stylesheet" href="styles.style.css">
+        <link rel="stylesheet" href="styles/style.css">
         <!-- JS -->
         <script src="scripts/main.js" defer></script>
     </head>
     <body>
-        <p>Hello world!</p>
+        <header>
+            <h1>Calendar</h1>
+            <!-- TODO: logo -->
+
+            <navbar>
+                <ul>
+                    <li><a href="index.html">Month</a></li>
+                </ul>
+            </navbar>
+        </header>
+            <table id="calendar">
+                <tr class="year">
+                    <th colspan="7"><h2 id="year"></h2></th>
+                </tr>
+                <tr class="month">
+                    <th colspan="7"><h2 id="month"></h2></th>
+                </tr>
+                <tr class="days">
+                    <th id="sunday" class="day" aria-label="Sunday"></th>
+                    <th id="monday" class="day" aria-label="Monday"></th>
+                    <th id="tuesday" class="day" aria-label="Tuesday"></th>
+                    <th id="wednesday" class="day" aria-label="Wednesday"></th>
+                    <th id="thursday" class="day" aria-label="Thursday"></th>
+                    <th id="friday" class="day" aria-label="Friday"></th>
+                    <th id="saturday" class="day" aria-label="Saturday"></th>
+                </tr>
+            </table>
+            <button id="prev">Previous</button>
+            <button id="next">Next</button>
+        <main>
+            <aside>
+            </aside>
+        </main>
+
+        <footer>
+        </footer>
     </body>
 </html>
