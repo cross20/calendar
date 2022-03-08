@@ -8,11 +8,11 @@ const today = new Date();
  */
 let selectedDate = today;
 
-function initializeCalendar(calendarYear, calendarMonth) {
+function initializeCalendar(targetYear, targetMonth) {
     const calendar = document.querySelector('#calendar tbody');
 
     // Initialize as the first date of the provided month and year.
-    let calendarDate = new Date(calendarYear, calendarMonth, 1);
+    let calendarDate = new Date(targetYear, targetMonth, 1);
 
     const year = calendar.querySelector('#year');
     year.textContent = `${calendarDate.toLocaleString('default', {year: 'numeric'})}`;
@@ -28,7 +28,7 @@ function initializeCalendar(calendarYear, calendarMonth) {
     calendarDate = new Date(calendarDate.getFullYear(), calendarDate.getMonth(), 1 - calendarDate.getDay());
 
     // Loop until the next month is reached.
-    while(calendarDate.getFullYear() <= calendarYear && calendarDate.getMonth() <= calendarMonth) {
+    while(calendarDate.getFullYear() < targetYear || (calendarDate.getFullYear() === targetYear && calendarDate.getMonth() <= targetMonth)) {
         const newWeek = document.createElement('tr');
         newWeek.className = 'week';
 
@@ -37,7 +37,7 @@ function initializeCalendar(calendarYear, calendarMonth) {
             const newDate = document.createElement('td');
     
             newDate.textContent = calendarDate.getDate();
-            newDate.className = calendarDate.getMonth() === calendarMonth ? calendarDate.getDate() === today.getDate() ? 'today-date' : 'inside-date' : 'outside-date';
+            newDate.className = calendarDate.getMonth() === targetMonth ? calendarDate.getDate() === today.getDate() ? 'today-date' : 'inside-date' : 'outside-date';
             newDate.ariaLabel = `${calendarDate.toLocaleString('default', {day: 'numeric', weekday: 'long', month: 'long', year: 'numeric'})}`;
 
             newWeek.appendChild(newDate);
