@@ -8,27 +8,34 @@ const today = new Date();
  */
 let selectedDate = today;
 
-function initializeCalendar(targetYear, targetMonth) {
-    const calendar = document.querySelector('#calendar tbody');
-
-    // Initialize as the first date of the provided month and year.
-    let calendarDate = new Date(targetYear, targetMonth, 1);
-
-    const year = calendar.querySelector('#year');
-    year.textContent = `${calendarDate.toLocaleString('default', {year: 'numeric'})}`;
-
-    const month = calendar.querySelector('#month');
-    month.textContent = `${calendarDate.toLocaleString('default', {month: 'long'})}`;
+/**
+ * Builds a calendar using the selected date's year and month.
+ */
+function initializeCalendar() {
+    const calendar = document.querySelector('.calendar');
+    const calendarTable = calendar.querySelector('tbody');
 
     document.querySelectorAll('.week').forEach((oldWeek) => {
-        calendar.removeChild(oldWeek);
+        calendarTable.removeChild(oldWeek);
     });
 
-    // Change the date to the first Sunday on the calendar. This will typically be a date in the previous month.
-    calendarDate = new Date(calendarDate.getFullYear(), calendarDate.getMonth(), 1 - calendarDate.getDay());
+    // Initialize calendar date as first of the month.
+    let calendarDate = new Date(selectedDate.getFullYear(), selectedDate.getMonth(), 1);
+
+    const y = calendar.querySelector('#year');
+    y.value = calendarDate.getFullYear();
+
+    const m = calendar.querySelector('#month');
+    m.value = calendarDate.getMonth();
+
+    const header = calendarTable.querySelector('#calendar-header');
+    header.textContent = calendarDate.toLocaleString('default', {month: 'long', year: 'numeric'});
+
+    // Set the date to the first Sunday of the week the calendar was initialized to. This will typically be a date in the previous month.
+    calendarDate = new Date(calendarDate.getFullYear(), calendarDate.getMonth(), calendarDate.getDate() - calendarDate.getDay());
 
     // Loop until the next month is reached.
-    while(calendarDate.getFullYear() < targetYear || (calendarDate.getFullYear() === targetYear && calendarDate.getMonth() <= targetMonth)) {
+    while(calendarDate.getFullYear() < selectedDate.getFullYear() || (calendarDate.getFullYear() === selectedDate.getFullYear() && calendarDate.getMonth() <= selectedDate.getMonth())) {
         const newWeek = document.createElement('tr');
         newWeek.className = 'week';
 
@@ -37,7 +44,7 @@ function initializeCalendar(targetYear, targetMonth) {
             const newDate = document.createElement('td');
     
             newDate.textContent = calendarDate.getDate();
-            newDate.className = calendarDate.getMonth() === targetMonth ? calendarDate.getDate() === today.getDate() ? 'today-date' : 'inside-date' : 'outside-date';
+            newDate.className = calendarDate.getMonth() === selectedDate.getMonth() ? calendarDate.getDate() === today.getDate() ? 'today-date' : 'inside-date' : 'outside-date';
             newDate.ariaLabel = `${calendarDate.toLocaleString('default', {day: 'numeric', weekday: 'long', month: 'long', year: 'numeric'})}`;
 
             newWeek.appendChild(newDate);
@@ -46,11 +53,20 @@ function initializeCalendar(targetYear, targetMonth) {
             calendarDate = new Date(calendarDate.getFullYear(), calendarDate.getMonth(), calendarDate.getDate() + 1);
         }
 
-        calendar.appendChild(newWeek)
+        calendarTable.appendChild(newWeek)
     }
 }
 
-initializeCalendar(today.getFullYear(), today.getMonth());
+initializeCalendar();
+
+// Date selector
+const monthYear = document.querySelector('#month-year');
+monthYear.addEventListener('submit', (e) => {
+    e.preventDefault();
+
+    selectedDate.setFullYear(e.target.elements.year.value, e.target.elements.month.value);
+    initializeCalendar();
+});
 
 /**
  * Change the date by a given number of months.
@@ -58,7 +74,7 @@ initializeCalendar(today.getFullYear(), today.getMonth());
  */
 function changeMonth(months) {
     selectedDate.setMonth(selectedDate.getMonth() + months);
-    initializeCalendar(selectedDate.getFullYear(), selectedDate.getMonth());
+    initializeCalendar();
 }
 
 const previous = document.querySelector('#prev');
