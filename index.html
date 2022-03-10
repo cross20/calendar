@@ -19,28 +19,49 @@
                 </ul>
             </navbar>
         </header>
-            <table id="calendar">
-                <tr class="year">
-                    <th colspan="7"><h2 id="year"></h2></th>
-                </tr>
-                <tr class="month">
-                    <th colspan="7"><h2 id="month"></h2></th>
-                </tr>
-                <tr class="days">
-                    <th id="sunday" class="day" aria-label="Sunday"></th>
-                    <th id="monday" class="day" aria-label="Monday"></th>
-                    <th id="tuesday" class="day" aria-label="Tuesday"></th>
-                    <th id="wednesday" class="day" aria-label="Wednesday"></th>
-                    <th id="thursday" class="day" aria-label="Thursday"></th>
-                    <th id="friday" class="day" aria-label="Friday"></th>
-                    <th id="saturday" class="day" aria-label="Saturday"></th>
-                </tr>
-            </table>
-            <button id="prev">Previous</button>
-            <button id="next">Next</button>
         <main>
             <aside>
             </aside>
+            <div class="calendar">
+                <table>
+                    <tr>
+                        <th colspan="7">
+                            <h2 id="calendar-header"></h2>
+                        </th>
+                    </tr>
+                    <tr>
+                        <th class="day" aria-label="Sunday">Sunday</th>
+                        <th class="day" aria-label="Monday">Monday</th>
+                        <th class="day" aria-label="Tuesday">Tuesday</th>
+                        <th class="day" aria-label="Wednesday">Wednesday</th>
+                        <th class="day" aria-label="Thursday">Thursday</th>
+                        <th class="day" aria-label="Friday">Firday</th>
+                        <th class="day" aria-label="Saturday">Saturday</th>
+                    </tr>
+                </table>
+                <div class="calendar-options">
+                    <form id="month-year">
+                        <select id="month" name="month" required>
+                            <option value="0">January</option>
+                            <option value="1">Febuary</option>
+                            <option value="2">March</option>
+                            <option value="3">April</option>
+                            <option value="4">May</option>
+                            <option value="5">June</option>
+                            <option value="6">July</option>
+                            <option value="7">August</option>
+                            <option value="8">September</option>
+                            <option value="9">October</option>
+                            <option value="10">November</option>
+                            <option value="11">December</option>
+                        </select>
+                        <input id="year" type="number" name="year" min="1000" max="9999" required>
+                        <button type="submit">Set</button>
+                    </form>
+                    <button id="prev">Previous</button>
+                    <button id="next">Next</button>
+                </div>
+            </div>
         </main>
 
         <footer>

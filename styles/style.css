@@ -2,34 +2,6 @@ th, td {
     border: 1px solid black;
 }
 
-#sunday::after {
-    content: "Sunday";
-}
-
-#monday::after {
-    content: "Monday";
-}
-
-#tuesday::after {
-    content: "Tuesday";
-}
-
-#wednesday::after {
-    content: "Wednesday"
-}
-
-#thursday::after {
-    content: "Thursday"
-}
-
-#friday::after {
-    content: "Friday";
-}
-
-#saturday::after {
-    content: "Saturday";
-}
-
 .today-date, .inside-date, .outside-date {
     padding: 5px;
 }
@@ -44,4 +16,8 @@ th, td {
 
 .outside-date {
     color: grey;
+}
+
+.calendar-options form, .calendar-options button {
+    display: inline-block;
 }
